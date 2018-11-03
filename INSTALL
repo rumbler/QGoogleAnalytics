@@ -1,0 +1,30 @@
+# QGoogleAnalytics
+Qt Quick Plugin for Google Analytics
+
+## Supported Platforms
+
+* Windows 7 or later
+* Linux
+* macOS 10.10 or later
+
+
+## Compiling QGoogleAnalytics
+
+Prerequisites:
+
+* Qt 5.9.0 or later
+* Qt Netowrk module for connect google analytics
+* On Windows:
+    * MinGW with g++ 5.3 or Visual Studio 2015 or later
+    * jom
+* On Mac OS X: latest Xcode
+* On Linux: g++ 5.3 or later
+
+
+## Compiling QGoogleAnalytics
+
+    cd $SOURCE_DIRECTORY
+    qmake -r
+    make (or mingw32-make or nmake or jom, depending on your platform)
+    make install
+    sudo make install *(to install on system, linux or mac)
