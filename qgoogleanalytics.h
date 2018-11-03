@@ -38,6 +38,7 @@ private:
     const QString APP_VERSION = QCoreApplication::applicationVersion();
     QString m_uuid;
     QString m_tid;
+    QByteArray userAgent;
     bool m_enabled;
     QSettings *st;
 

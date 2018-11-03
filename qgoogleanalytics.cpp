@@ -5,6 +5,7 @@
 #include <QNetworkRequest>
 #include <QUrlQuery>
 #include <QNetworkAccessManager>
+#include <QSysInfo>
 
 QGoogleAnalytics::QGoogleAnalytics(QObject *parent):
     QObject(parent)
@@ -18,6 +19,22 @@ QGoogleAnalytics::QGoogleAnalytics(QObject *parent):
         setValue("App/uuid", QUuid::createUuid().toString());
 
     m_uuid = getValue("App/uuid").value<QString>();
+
+#ifdef Q_OS_LINUX
+    userAgent.append(QString("Mozilla/5.0 (X11; Linux x86_64) Gecko/20100101 Firefox/15.0.1"));
+#endif
+
+#ifdef Q_OS_MACOS
+    userAgent.append(QString("Mozilla/5.0 (Macintosh; Intel Mac OS X %1) AppleWebKit/601.3.9 "
+                             "(KHTML, like Gecko) Version/9.0.2 Safari/601.3.9")
+                     .arg(QSysInfo::productVersion()));
+#endif
+
+#ifdef Q_OS_WIN
+    userAgent.append(QString("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                             "(KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246"));
+#endif
+
 }
 
 QGoogleAnalytics::~QGoogleAnalytics()
@@ -32,6 +49,7 @@ void QGoogleAnalytics::logScreen(const QString &pageTitle)
 
     // prepare request
     QNetworkRequest req(QUrl("https://google-analytics.com/collect"));
+    req.setRawHeader("User-Agent", userAgent);
     req.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
 
     // prepare query
@@ -64,6 +82,7 @@ void QGoogleAnalytics::logEvent(const QString &eventCategory,
 
     // prepare request
     QNetworkRequest req(QUrl("https://google-analytics.com/collect"));
+    req.setRawHeader("User-Agent", userAgent);
     req.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
 
     // prepare query
@@ -95,6 +114,7 @@ void QGoogleAnalytics::logException(const QString &description,
 
     // prepare request
     QNetworkRequest req(QUrl("https://google-analytics.com/collect"));
+    req.setRawHeader("User-Agent", userAgent);
     req.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
 
     // prepare query
