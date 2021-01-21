@@ -1,5 +1,6 @@
 # Build 
-https://travis-ci.org/rumbler/QGoogleAnalytics.svg?branch=master
+
+[![Build Status](https://travis-ci.org/rumbler/QGoogleAnalytics.svg?branch=master)](https://travis-ci.org/rumbler/QGoogleAnalytics)
 
 # QGoogleAnalytics
 Qt Quick Plugin for Google Analytics
