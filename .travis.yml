@@ -13,4 +13,4 @@ before_install:
 script:
   - qmake -project
   - qmake qgoogleanalytics.pro
-  - make
+  - make -j 4
